@@ -281,6 +281,9 @@ class WebdavFileSystem(AbstractFileSystem):
         **kwargs: Any,
     ) -> Union["WebdavFile", "UploadFile"]:
         """Return a file-like object from the filesystem."""
+        if block_size is None:
+            block_size = self.blocksize
+
         size = kwargs.pop("size", None)
         assert "a" not in mode
 
